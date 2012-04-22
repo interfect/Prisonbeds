@@ -35,13 +35,13 @@ public class Prisonbeds extends JavaPlugin
 		
 		try
 		{
-			Scanner beavis = new Scanner(new File("plugins/corrections"));
-			while (beavis.hasNext())
+			Scanner correctionScanner = new Scanner(new File("plugins/corrections"));
+			while (correctionScanner.hasNext())
 			{
-				String[] tmp = beavis.next().split(";");
+				String[] tmp = correctionScanner.next().split(";");
 				this.correctedSpawns.put(tmp[0], generateLocation(tmp[1]));
 			}
-			beavis.close();
+			correctionScanner.close();
 		} 
 		catch (FileNotFoundException e)
 		{
@@ -84,7 +84,10 @@ public class Prisonbeds extends JavaPlugin
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
 	{
-		if (((sender instanceof Player)) && (cmd.getName().equalsIgnoreCase("pbset")))
+		if(!(sender instanceof Player)) {
+			return false; // Silently fail for console
+		}
+		if (cmd.getName().equalsIgnoreCase("pbset"))
 		{
 			Player s = (Player)sender;
 			if (s.getWorld().getEnvironment() == World.Environment.THE_END)
@@ -95,7 +98,16 @@ public class Prisonbeds extends JavaPlugin
 			this.primedCorrections.put(s.getPlayerListName(), s.getLocation());
 			System.out.println("Prisonbeds - " + s.getPlayerListName() + " is primed at " + s.getLocation());
 			s.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" You have primed a prison, kill a player to activate it.");
-
+			s.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" Prison will remain primed until you /pbunset it.");
+			s.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" Or until the server restarts.");
+			
+			return true;
+		} else if(cmd.getName().equalsIgnoreCase("pbunset")) {
+			Player s = (Player)sender;
+			primedCorrections.remove(s.getName());
+			s.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" Your prison is no longer primed.");
+			s.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" Players you kill will not be imprisoned.");
+			
 			return true;
 		}
 		return false;
