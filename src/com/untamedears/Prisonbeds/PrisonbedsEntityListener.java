@@ -42,7 +42,7 @@ public class PrisonbedsEntityListener implements Listener
 				
 				
 				System.out.println("Prisonbeds - " + killer.getDisplayName() + " imprisoned " + victim.getDisplayName());
-				victim.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+"You were imprisoned by " + killer.getDisplayName());
+				victim.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" You were imprisoned by " + killer.getDisplayName());
 				
 				// Prepare the location for announcement
 				String prisionLocName = prisonLoc.getWorld().getName() + " (" + prisonLoc.getX() + ", " + prisonLoc.getY() + ", " + prisonLoc.getZ() + ")";
