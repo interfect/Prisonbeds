@@ -9,5 +9,14 @@ database: false
 
 commands:
   pbset:
-    description: Sets the next player you kill's spawn point for him!
+    description: Sets a prison for the next player you kill.
     usage: /pbset
+  pbunset:
+    description: Unsets your primed prison.
+    usage: /pbunset
+  pbinfo:
+    description: Gets information on your currently primed prison.
+    usage: /pbinfo
+  pbhelp:
+    description: Help for Prisonbeds.
+    usage: /pbhelp
