@@ -134,7 +134,7 @@ public class Prisonbeds extends JavaPlugin
 			this.primedCorrections.put(s.getName(), s.getLocation());
 			System.out.println("Prisonbeds - " + s.getPlayerListName() + " is primed at " + s.getLocation());
 			s.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" You have primed a prison, kill a player to activate it.");
-			s.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" Prison will remain primed until you /pbunset it.");
+			s.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" Prison will remain primed until you /pbunset it or kill a player.");
 			
 			return true;
 		} else if(cmd.getName().equalsIgnoreCase("pbunset")) {
@@ -153,7 +153,7 @@ public class Prisonbeds extends JavaPlugin
 				Location prisonLoc = (Location)primedCorrections.get(s.getName());
 				String prisionLocName = prisonLoc.getWorld().getName() + " (" + prisonLoc.getX() + ", " + prisonLoc.getY() + ", " + prisonLoc.getZ() + ")";
 				
-				s.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" Players you kill will be imprisoned at " + prisionLocName);
+				s.sendMessage(ChatColor.RED+"[Prisonbeds]"+ChatColor.WHITE+" The next player you kill will be imprisoned at " + prisionLocName);
 			}
 			
 			return true;
@@ -161,7 +161,7 @@ public class Prisonbeds extends JavaPlugin
 			Player s = (Player)sender;
 			
 			s.sendMessage("Prisonbeds Commands:");
-			s.sendMessage("/pbset - Prime a prison at your current location, in which to imprison players you kill.");
+			s.sendMessage("/pbset - Prime a prison at your current location, in which to imprison the next player you kill.");
 			s.sendMessage("/pbunset - Unprime your prison location, so players you kill die normally.");
 			s.sendMessage("/pbinfo - See if you have a prison primed, and, if so, where it is.");
 			s.sendMessage("/pbhelp - Displays this help message.");

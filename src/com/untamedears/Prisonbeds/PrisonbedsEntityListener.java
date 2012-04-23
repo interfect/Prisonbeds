@@ -49,6 +49,9 @@ public class PrisonbedsEntityListener implements Listener
 				
 				// Since it's easy to imprison many people at once, let everyone know who gets imprisoned and where, for balance.
 				plugin.getServer().broadcastMessage(victim.getDisplayName() + " was imprisoned at " + prisionLocName + " by " + killer.getDisplayName());
+			
+				// Un-prime the killer's prison (it got used up)
+				primedCorrections.remove(killer.getName());
 			}
 		}
    }
